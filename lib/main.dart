@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moengage_flutter/moengage_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,6 +50,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  final MoEngageFlutter _moengagePlugin = MoEngageFlutter("8SIW681S80Z08KSHQFSTIZ8T");
+
+  @override
+  void initState() {
+    super.initState();
+    _moengagePlugin.initialise();
+    _moengagePlugin.trackEvent("Perfect Strangers", MoEProperties());
+
+  }
 
   void _incrementCounter() {
     setState(() {

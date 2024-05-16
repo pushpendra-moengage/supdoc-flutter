@@ -2,7 +2,7 @@
     package="com.moengage.supdoc.flutter.supdoc_flutter">
    <application
         android:label="supdoc_flutter"
-        android:name="${applicationName}"
+        android:name=".FlutterApp"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -5,6 +5,31 @@ void main() {
   runApp(const MyApp());
 }
 
+void _onInAppClick(ClickData message) {
+  print("MoE This is a inapp click callback from native to flutter. Payload " +
+      message.toString());
+  if( message.action.actionType == ActionType.navigation){
+    var navType = (message.action as NavigationAction);
+    switch(navType.navigationType) {
+
+      case NavigationType.deeplink:
+        // Client's logic for redirection
+        var deeplink = navType.navigationUrl;
+        break;
+      case NavigationType.screenName:
+        // Client's logic for screenName redirection
+        var screenName = navType.navigationUrl;
+        var kvpairs = navType.keyValuePairs;
+
+        if(kvpairs.containsKey("screenName")){
+          var screenName = kvpairs["screenName"];
+          // Flutter logic for screenName redirection
+        }
+        break;
+    }
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -55,7 +80,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+
+    _moengagePlugin.setInAppClickHandler(_onInAppClick);
+
     _moengagePlugin.initialise();
+    _moengagePlugin.showInApp();
     _moengagePlugin.trackEvent("Perfect Strangers", MoEProperties());
 
   }
